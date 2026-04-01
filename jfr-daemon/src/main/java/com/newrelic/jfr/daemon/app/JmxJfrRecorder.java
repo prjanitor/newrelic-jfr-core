@@ -28,6 +28,9 @@ public class JmxJfrRecorder implements JfrRecorder {
   private final long recordingId;
 
   public JmxJfrRecorder(MBeanServerConnection connection, boolean streamFromJmx, long recordingId) {
+    if (connection == null) {
+      throw new IllegalArgumentException("MBeanServerConnection cannot be null");
+    }
     this.connection = connection;
     this.streamFromJmx = streamFromJmx;
     this.recordingId = recordingId;
